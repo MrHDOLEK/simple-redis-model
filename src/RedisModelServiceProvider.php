@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace MrHDOLEK\SimpleRedisModel;
 
-use MrHDOLEK\SimpleRedisModel\Commands\SkeletonCommand;
+use MrHDOLEK\SimpleRedisModel\Commands\RedisModelMakerCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class RedisModelServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         $package
-            ->name("skeleton")
-            ->hasCommand(SkeletonCommand::class);
+            ->name("SimpleRedisModel")
+            ->hasCommand(RedisModelMakerCommand::class);
     }
 }

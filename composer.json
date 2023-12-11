@@ -17,8 +17,10 @@
     ],
     "require": {
         "php": "^8.1",
+        "illuminate/contracts": "^10.0",
+        "predis/predis": "^2.2",
         "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^10.0"
+        "ext-redis": "*"
     },
     "require-dev": {
         "blumilksoftware/codestyle": "*",
@@ -68,7 +70,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MrHDOLEK\\SimpleRedisModel\\SkeletonServiceProvider"
+                "RedisModelServiceProvider"
             ],
             "aliases": {
                 "Skeleton": "MrHDOLEK\\SimpleRedisModel\\Facades\\Skeleton"
