@@ -1,16 +1,18 @@
 <?php
 
-namespace VendorName\Skeleton\Facades;
+declare(strict_types=1);
+
+namespace MrHDOLEK\SimpleRedisModel\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \VendorName\Skeleton\Skeleton
+ * @see \MrHDOLEK\SimpleRedisModel\Skeleton
  */
 class Skeleton extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \VendorName\Skeleton\Skeleton::class;
+        return \MrHDOLEK\SimpleRedisModel\Skeleton::class;
     }
 }

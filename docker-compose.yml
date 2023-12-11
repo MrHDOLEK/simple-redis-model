@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+    php:
+        build:
+            context: .
+            dockerfile: .docker/dev/php/Dockerfile-dev
+            args:
+                INSTALL_XDEBUG: false
+        working_dir: /var/www
+        environment:
+            - DOCKER=1
+            - PHP_IDE_CONFIG=serverName=simple-redis-model.local
+        volumes:
+            - .docker/dev/php/conf/php.ini:/usr/local/etc/php/conf.d/php.ini
+            - .docker/dev/php/conf/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+            - .:/var/www:delegated
+        ports:
+            - ${EXTERNAL_PHP_PORT:-9000}:9000
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        depends_on:
+            - redis
+        networks:
+            - simple-redis-model
+    redis:
+        image: 'redis:6'
+        command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
+        ports:
+            - ${EXTERNAL_REDIS_PORT:-6379}:6379
+        volumes:
+            - ./storage/redis:/data
+        networks:
+            - simple-redis-model
+# Networks
+networks:
+    simple-redis-model:
+        driver: bridge
