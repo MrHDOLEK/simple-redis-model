@@ -1,47 +1,42 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "mrhdolek/simple-redis-model",
+    "description": "Simple model to redis",
     "keywords": [
-        ":vendor_name",
+        "MrHDOLEK",
         "laravel",
-        ":package_slug"
+        "simple-redis-model"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/MrHDOLEK/simple-redis-model",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Aleksander Kowalski",
+            "email": "mrhdolek14@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
+        "illuminate/contracts": "^10.0",
+        "predis/predis": "^2.2",
         "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^10.0"
+        "ext-redis": "*"
     },
     "require-dev": {
-        "laravel/pint": "^1.0",
+        "blumilksoftware/codestyle": "*",
         "nunomaduro/collision": "^7.8",
-        "larastan/larastan": "^2.0.1",
         "orchestra/testbench": "^8.8",
-        "pestphp/pest": "^2.20",
-        "pestphp/pest-plugin-arch": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
         "spatie/laravel-ray": "^1.26"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "MrHDOLEK\\SimpleRedisModel\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -58,10 +53,12 @@
             "@composer run build",
             "@php vendor/bin/testbench serve"
         ],
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
+        "cs:fix": "./vendor/bin/php-cs-fixer fix --diff --config codestyle.php",
+        "cs:check": "./vendor/bin/php-cs-fixer fix --dry-run --diff --config codestyle.php",
+        "phpstan": [
+            "php -d memory_limit=600M vendor/bin/phpstan analyse -c phpstan.neon"
+        ],
+        "test": "phpunit"
     },
     "config": {
         "sort-packages": true,
@@ -73,10 +70,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "RedisModelServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "Skeleton": "MrHDOLEK\\SimpleRedisModel\\Facades\\Skeleton"
             }
         }
     },
